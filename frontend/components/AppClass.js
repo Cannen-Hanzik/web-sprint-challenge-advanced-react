@@ -14,54 +14,54 @@ const URL = 'http://localhost:9000/api/result';
 export default class AppClass extends React.Component {
   state = intState;
   vertController = (key, value) => {
-    key === 'up' && value > 1 ?
+    key === 'up' && value > 1 ?  
+    this.setState({
+      ...this.state,
+      vert: value - 1,
+      count: this.state.count + 1,
+      moveError: '',
+    }) 
+      : key === 'up' && value === 1 ? 
+      this.setState({
+      ...this.state,
+      moveError: "You can't go up",
+    })
+    : key === 'down' && value < 3 ?
       this.setState({
         ...this.state,
-        vert: value - 1,
+        vert: value + 1,
         count: this.state.count + 1,
-        moveError: (''),
+        moveError: '',
       })
-        : key === 'up' && value === 1 ?
-          this.setState({
-            ...this.state,
-            moveError: 'You can no longer go upwards!'
-          })
-          : key === 'down' && value < 3 ?
-            this.setState({
-              ...this.state,
-              vert: value + 1,
-              count: this.state.count + 1,
-              moveError:'',
-            })
-          : this.setState({
-            ...this.state,
-            moveError: 'You can no longer go downwards!'
-          })
+      : this.setState({
+        ...this.state,
+        moveError: "You can't go down",
+      })
   }
   hozController = (key, value) => {
     key === 'left' && value > 1 ?
+    this.setState({
+      ...this.state,
+      hoz: value - 1,
+      count: this.state.count + 1,
+      moveError: '',
+    }) 
+      : key === 'left' && value === 1 ?
       this.setState({
         ...this.state,
-        hoz: value - 1,
-        count: this.state.count + 1,
-        moveError: (''),
+        moveError: "You can't go left",
       })
-        : key === 'left' && value === 1 ?
-          this.setState({
-            ...this.state,
-            moveError: 'You can no longer go left!'
-          })
-          : key === 'right' && value < 3 ?
-            this.setState({
-              ...this.state,
-              hoz: value + 1,
-              count: this.state.count + 1,
-              moveError:'',
-            })
-          : this.setState({
-            ...this.state,
-            moveError: 'You can no longer go right!'
-          })
+      : key === 'right' && value < 3 ?
+      this.setState({
+        ...this.state,
+        hoz: value + 1,
+        count: this.state.count + 1,
+        moveError: '',
+      })
+        : this.setState({
+          ...this.state,
+          moveError: "You can't go right",
+        })
   }
 
   resetter = () => {
@@ -136,7 +136,7 @@ export default class AppClass extends React.Component {
           </div>          
         </div>
         <div className="info">
-          <h3 id="message"></h3>
+          <h3 id="message">{this.state.moveError}</h3>
         </div>
         <div id="keypad">
           <button id="left" onClick={() => this.hozController('left', this.state.hoz)}>LEFT</button>

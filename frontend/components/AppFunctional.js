@@ -13,7 +13,7 @@ export default function AppFunctional(props) {
     (  setVert(prev => prev - 1),
        setCount(prev => prev + 1),
        setMoveError(''))
-       : setMoveError('You can no longer go upwards!');
+       : setMoveError("You can't go up");
   }
 
   const downwards = () => {
@@ -21,7 +21,7 @@ export default function AppFunctional(props) {
     ( setVert(prev => prev + 1),
       setCount(prev => prev + 1),
       setMoveError(''))
-      : setMoveError('You can no longer go downwards!');
+      : setMoveError("You can't go down");
   }
 
   const goLeft = () => {
@@ -29,7 +29,7 @@ export default function AppFunctional(props) {
     ( setHoz(prev => prev - 1),
       setCount(prev => prev + 1),
       setMoveError(''))
-      : setMoveError('You can no longer go further left!');
+      : setMoveError("You can't go left");
   }
 
   const goRight = () => {
@@ -37,7 +37,7 @@ export default function AppFunctional(props) {
     ( setHoz(prev => prev + 1),
       setCount(prev => prev + 1),
       setMoveError(''))
-      : setMoveError('You can no longer go further right!');
+      : setMoveError("You can't go right");
   }
   
   const resetter = () => {
@@ -116,7 +116,7 @@ export default function AppFunctional(props) {
       <form>
         <input 
           id="email"
-          value='email'
+          value={email}
           onChange={evt => setEmail(evt.target.value)} 
           type="email" 
           placeholder="type email">
