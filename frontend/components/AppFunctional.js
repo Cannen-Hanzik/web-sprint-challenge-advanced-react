@@ -2,7 +2,11 @@ import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 
 export default function AppFunctional(props) {
-
+  const [count, setCount] = useState(0);
+  const [vert, setVert] = useState(2);
+  const [hoz, setHoz] = useState(2);
+  const [moveError, setMoveError] = useState('');
+  const [email, setEmail] = useState('');
   
   return (
     <div id="wrapper" className={props.className}>
