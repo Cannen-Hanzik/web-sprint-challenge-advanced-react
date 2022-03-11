@@ -7,7 +7,67 @@ export default function AppFunctional(props) {
   const [hoz, setHoz] = useState(2);
   const [moveError, setMoveError] = useState('');
   const [email, setEmail] = useState('');
+
+  const upwards = () => {
+    vert > 1 ?
+    (  setVert(prev => prev - 1),
+       setCount(prev => prev + 1),
+       setMoveError(''))
+       : setMoveError('You can no longer go upwards!');
+  }
+
+  const downwards = () => {
+    vertical < 3 ?
+    ( setVert(prev => prev + 1),
+      setCount(prev => prev + 1),
+      setMoveError(''))
+      : setMoveError('You can no longer go downwards!');
+  }
+
+  const goLeft = () => {
+    hoz > 1 ?
+    ( setHoz(prev => prev - 1),
+      setCount(prev => prev + 1),
+      setMoveError(''))
+      : setMoveError('You can no longer go further left!');
+  }
+
+  const goRight = () => {
+    hoz < 3 ?
+    ( setHoz(prev => prev + 1),
+      setCount(prev => prev + 1),
+      setMoveError(''))
+      : setMoveError('You can no longer go further right!');
+  }
   
+  const resetter = () => {
+    setCount(0);
+    setVert(2);
+    setHoz(2);
+    setMoveError('');
+    setEmail('');
+  }
+
+  const postSubmission = newSub => {
+    axios.post('http://localhost:9000/api/result', newSub)
+      .then(res => {
+        setMoveError(res.data.message)
+      })
+      .catch(err => setMoveError(err.response.data.message))
+  }
+
+  const formSubmission = evt => {
+    const newSub = {
+      x: hoz,
+      y: vert,
+      steps: count,
+      email: email.trim(),
+    }
+    postSubmission(newSub);
+    evt.preventDefault();
+    setEmail('');
+  }
+
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
